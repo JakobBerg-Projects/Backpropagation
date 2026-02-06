@@ -183,13 +183,15 @@ These architectures allow us to investigate the effect of network depth, width, 
 
 #### Optimization Hyperparameters
 
-For each architecture, the following optimizer configurations were evaluated using stochastic gradient descent (SGD):
+For each architecture, we evaluated four SGD configurations (learning rate fixed to 0.01) chosen to study the effect of momentum and weight decay:
 
 - Learning rate: `0.01`
 - Weight decay: `{0.0, 1e-4, 0.01}`
 - Momentum: `{0.0, 0.9}`
 
 This results in a total of sixteen model configurations.
+
+We did not evaluate all possible hyperparameter combinations, as a full grid search would be computationally expensive and unlikely to provide additional insight. Instead, we selected a representative subset of configurations sufficient to study the effect of momentum and weight decay. 
 
 All models were trained for **20 epochs** using a batch size of **64**, with a fixed random seed to ensure reproducibility.
 
@@ -202,7 +204,7 @@ The configuration with the highest validation accuracy was selected as the best-
 
 #### Model comparison
 
-We created a function `plot_best_per_arch` which plots the validation loss for the best parameter for each of the different network architectures.
+We created a function `plot_val_loss_best_by_acc` which plots the validation loss for the best parameter for each of the different network architectures.
 
 <p align="center">
   <img src="imgs/val_loss_best_by_acc.png" width="450">
