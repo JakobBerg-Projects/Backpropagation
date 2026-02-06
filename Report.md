@@ -125,9 +125,9 @@ The effect of normalization is illustrated in Figure 1.
 
 <p align="center">
   <img src="imgs/norm_vs_unnorm.png" width="450">
+  <br>
+  Figure 1: Effect of normalization
 </p>
-
-*Figure 1: Effect of normalization*
 
 ### Model Architecture
 
@@ -186,7 +186,7 @@ These architectures allow us to investigate the effect of network depth, width, 
 
 For each architecture, the following optimizer configurations were evaluated using stochastic gradient descent (SGD):
 
-- Learning rate: **0.01**
+- Learning rate: `0.01`
 - Weight decay: `{0.0, 1e-4, 0.01}`
 - Momentum: `{0.0, 0.9}`
 
@@ -207,6 +207,8 @@ We created a function `plot_best_per_arch` which plots the validation loss for t
 
 <p align="center">
   <img src="imgs/val_loss_best_by_acc.png" width="450">
+  <br>
+  Figure 2: Validation and traning loss of the four models with the highest validation accuracy 
 </p>
 
 We observe that for all architectures the training loss decreases monotonically over the training period.  
@@ -238,19 +240,23 @@ Best validation accuracy: 0.864
 After selecting the best model based on validation accuracy, its performance is evaluated on the test set.  
 The model achieves a test accuracy of **0.86**, indicating good generalization to previously unseen data.
 
-To further analyze the classification performance, a confusion matrix is computed for the test set and shown in Figure X.
+To further analyze the classification performance, a confusion matrix is computed for the test set and shown in Figure 3.
 
 <p align="center">
   <img src="imgs/confusion_matrix.png" width="450">
+    <br>
+  Figure 3: Confusion matrix from the test set predictions
 </p>
 
 The confusion matrix shows that the model correctly classifies **881 out of 1020** test images.  
 Misclassifications are relatively balanced between the two classes, with **71 plane images** misclassified as birds and **68 bird images** misclassified as planes. This suggests that the model does not exhibit a strong bias toward either class.
 
-To further understand the model’s errors, we visualize a selection of misclassified test images in Figure X.
+To further understand the model’s errors, we visualize a selection of misclassified test images in Figure 4.
 
 <p align="center">
   <img src="imgs/misclassifications.png" width="450">
+      <br>
+  Figure 4: Visualization of some of the models misclassifications
 </p>
 
 The examples show that several misclassifications occur in images where the visual appearance of planes and birds is ambiguous. In particular, low image resolution, motion blur, and complex backgrounds make it difficult for the model to distinguish between the two classes. This suggests that the errors are primarily caused by challenging visual conditions rather than a systematic bias in the model.
