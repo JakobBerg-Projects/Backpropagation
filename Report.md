@@ -92,7 +92,6 @@ This implementation faithfully follows the theoretical backpropagation equations
 
 <br><br><br>
 <br><br><br>
-<br><br><br>
 <h2 align="center">Gradient descent:</h2> 
 
 
@@ -212,7 +211,7 @@ We created a function `plot_best_per_arch` which plots the validation loss for t
 </p>
 
 We observe that for all architectures the training loss decreases monotonically over the training period.  
-The validation loss initially decreases, but after a certain number of epochs it starts to increase again.  
+The validation loss initially decreases, but after a certain number of epochs it starts to increase again, and some of the plots show heavy spikes.  
 This behavior indicates that the models begin to overfit the training data as training progresses.
 
 Although the loss curves are used to analyze the training dynamics and overfitting behavior of the models, the final model selection is performed based on **validation accuracy**, as specified in the task description.
@@ -221,24 +220,24 @@ The validation loss and validation accuracy capture different aspects of model p
 
 Consequently, the model with the highest validation accuracy is selected as the best-performing model, even though the loss curves are used for qualitative analysis of the training process.
 
-The model with the highest accuracy was the **dropout** model which is built as follows:
+The model with the highest accuracy was the **width** model which is built as follows:
 ```
 Best model configuration:
-Architecture name: dropout
-Hidden sizes: (512, 128, 32)
+Architecture name: width
+Hidden sizes: (1024, 128, 32)
 Learning rate: 0.01
 Weight decay: 0.0
-Momentum: 0.9
+Momentum: 0.0
 Epochs: 20
-Dropout: 0.3
-Best epoch: 19
-Best validation accuracy: 0.864
+Dropout: 0.0
+Best epoch: 18
+Best validation accuracy: 0.863
 ```
 
 #### Evaluation best model on test-data
 
 After selecting the best model based on validation accuracy, its performance is evaluated on the test set.  
-The model achieves a test accuracy of **0.86**, indicating good generalization to previously unseen data.
+The model achieves a test accuracy of **0.863**, indicating good generalization to previously unseen data.
 
 To further analyze the classification performance, a confusion matrix is computed for the test set and shown in Figure 3.
 
@@ -248,8 +247,8 @@ To further analyze the classification performance, a confusion matrix is compute
   Figure 3: Confusion matrix from the test set predictions
 </p>
 
-The confusion matrix shows that the model correctly classifies **881 out of 1020** test images.  
-Misclassifications are relatively balanced between the two classes, with **71 plane images** misclassified as birds and **68 bird images** misclassified as planes. This suggests that the model does not exhibit a strong bias toward either class.
+The confusion matrix shows that the model correctly classifies **1724 out of 2000** test images.  
+Misclassifications are relatively balanced between the two classes, with **128 plane images** misclassified as birds and **148 bird images** misclassified as planes. This suggests that the model does not exhibit a strong bias toward either class.
 
 To further understand the model’s errors, we visualize a selection of misclassified test images in Figure 4.
 
@@ -263,7 +262,9 @@ The examples show that several misclassifications occur in images where the visu
 
 ### Discussion of results
 
-The experiments show that a multilayer perceptron trained with gradient descent achieves a reasonable test accuracy of 0.86 on the binary CIFAR-10 classification task. However, this performance is lower than what might be expected given that some misclassified images are visually easy for a human to label. One likely reason is that MLPs treat images as flat vectors and therefore do not exploit the spatial structure present in image data. As a result, the model may fail to recognize important local patterns, such as edges or object shapes, which are crucial for distinguishing planes from birds. Additionally, CIFAR-10 images are low resolution and often contain cluttered backgrounds, making the classification task challenging without stronger inductive biases.
+The experiments show that a multilayer perceptron trained with gradient descent achieves a reasonable test accuracy of 0.863 on the binary CIFAR-10 classification task. However, the performance is limited by the fact that MLPs treat images as flat vectors and therefore do not exploit the spatial structure of image data. As a result, important local patterns such as edges and shapes are not explicitly modeled, making the task challenging, especially given the low resolution and cluttered backgrounds of CIFAR-10 images.
 
-Across all architectures, training loss decreased monotonically while validation loss eventually increased, indicating overfitting. This suggests that the models had sufficient capacity to fit the training data but struggled to generalize. Increasing network depth or width did not improve performance and in some cases worsened generalization, likely because the additional parameters increased variance without providing useful structure for image understanding. The dropout-regularized model achieved the best performance, showing that regularization was essential for controlling overfitting. Nevertheless, even with dropout, the model still misclassified some clear examples, indicating that the limitation lies not in the optimization procedure or code correctness, but in the choice of model architecture. Overall, these results suggest that further improvements would require models better suited for image data, such as convolutional neural networks, as well as data augmentation or transfer learning to improve robustness.
+Across all architectures, the training loss decreased monotonically, while the validation loss eventually became unstable, indicating overfitting. Increasing network depth did not improve performance and in some cases worsened generalization. The width model achieved the highest validation accuracy, despite exhibiting noticeable spikes in validation loss. This highlights the difference between loss and accuracy: while the loss reflects prediction confidence, accuracy only measures whether predictions are correct.
+
+Despite its superior accuracy, the width model still misclassified some visually clear examples, suggesting that the main limitation lies in the model architecture rather than the optimization procedure. Overall, these results indicate that further improvements would require architectures better suited for image data, such as convolutional neural networks, as well as techniques like data augmentation or transfer learning.
 
