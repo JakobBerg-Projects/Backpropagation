@@ -282,7 +282,7 @@ To further understand the model’s errors, we visualize a selection of misclass
   Figure 4: Visualization of some of the models misclassifications
 </p>
 
-The examples show that several misclassifications occur in images where the visual appearance of planes and birds is ambiguous. In particular, low image resolution, motion blur, and complex backgrounds make it difficult for the model to distinguish between the two classes. This suggests that the errors are primarily caused by challenging visual conditions rather than a systematic bias in the model.
+The examples show that several misclassifications occur in images where the visual appearance of planes and birds is ambiguous. In particular, unusual angles, motion blur, and complex backgrounds make it difficult for the model to distinguish between the two classes. This suggests that the errors are primarily caused by challenging visual conditions rather than a systematic bias in the model.
 
 ### Discussion of results
 
@@ -291,4 +291,9 @@ The experiments show that a multilayer perceptron trained with gradient descent 
 Across all architectures, the training loss decreased monotonically, while the validation loss eventually became unstable, indicating overfitting. Increasing network depth did not improve performance and in some cases worsened generalization. The width model achieved the highest validation accuracy, despite exhibiting noticeable spikes in validation loss. This highlights the difference between loss and accuracy: while the loss reflects prediction confidence, accuracy only measures whether predictions are correct.
 
 Despite its superior accuracy, the width model still misclassified some visually clear examples, suggesting that the main limitation lies in the model architecture rather than the optimization procedure. Overall, these results indicate that further improvements would require architectures better suited for image data, such as convolutional neural networks, as well as techniques like data augmentation or transfer learning.
+
+
+### Diclosure of AI 
+
+The service ChatGPT has been used for language editing and or improvements to the text in the report. The final result was fact-checked and somewhat rewritten by its authors. 
 
