@@ -4,6 +4,28 @@
 
 <h2 align="center">Backpropagation:</h2> 
 
+### Divition of tasks: 
+We worked togheter on all of the tasks and never did one task alone. Below is a basic distrobution of the workflow on who tok the most charge on the different tasks. Toghether we discussed how we would go about traning the models and what approaches we would use throughout the project. Examples of this would be: Which hyperparameters to search and how thouroghly we would search them, what models to test and how we would build our methods and helpmethods. 
+
+**Tobias:**
+- Model architechture 
+- Mathmatical explanations 
+- Theoretical understanding of effects of hyperparameters 
+- Visualisations 
+- Debugging 
+
+
+
+**Jakob:**
+- Main work of traning models
+- Hyperparameter search 
+- Model evaluations 
+- Visualisations 
+- Loading and preprosessing
+- Debugging
+
+
+
 
 ### Overall approach:
 
